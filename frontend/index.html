@@ -1,0 +1,17 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FlowMindz Dashboard</title>
+</head>
+<body>
+    <h1>FlowMindz Vite Painel</h1>
+    <p>Status do backend: <span id="status">carregando...</span></p>
+    <script>
+        fetch("http://localhost:8000/")
+            .then(res => res.json())
+            .then(data => document.getElementById("status").innerText = data.FlowMindz)
+            .catch(() => document.getElementById("status").innerText = "Erro");
+    </script>
+</body>
+</html>
