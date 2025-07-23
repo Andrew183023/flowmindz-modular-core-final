@@ -9,7 +9,7 @@ Este repositório contém o núcleo modular da plataforma **FlowMindz**, com os 
 ## 🚀 Como rodar localmente
 
 ```bash
-git clone https://github.com/Andrew183023/flowmindz-modular-core.git
+git remote add origin https://github.com/Andrew183023/flowmindz-modular-core-final.git
 cd flowmindz-modular-core
 python -m venv venv
 source venv/bin/activate  # ou .\venv\Scripts\activate no Windows
