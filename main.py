@@ -62,9 +62,8 @@ def avaliar_com_ia(prompt: str) -> str:
 @app.post("/salvar_analise")
 def salvar_analise(analise: AnaliseInput):
     try:
-        # 1. Conexão com banco
-        conn = get_connection()
-        cur = conn.cursor()
+        print("[DEBUG] DATABASE_URL:", os.getenv("DATABASE_URL"))
+
 
         # 2. Inserir dados
         cur.execute("""
