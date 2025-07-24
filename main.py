@@ -15,7 +15,6 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 app = FastAPI()
 
-
 # 🚀 Modelo recebido no POST
 class AnaliseInput(BaseModel):
     cnpj: str
@@ -23,7 +22,6 @@ class AnaliseInput(BaseModel):
     tipo_empresa: str
     regime_tributario: str
     resultado: dict
-
 
 # 🧠 Gera o prompt de análise tributária
 def gerar_prompt_analise(dados: AnaliseInput) -> str:
@@ -42,7 +40,6 @@ Dados da empresa:
 - Resultado Fiscal: {json.dumps(dados.resultado)}
 """
 
-
 # 🔗 Conecta à OpenAI e recebe a resposta estruturada
 def avaliar_com_ia(prompt: str) -> str:
     try:
@@ -57,15 +54,17 @@ def avaliar_com_ia(prompt: str) -> str:
     except Exception as e:
         return f"Erro ao consultar IA: {str(e)}"
 
-
 # 🚀 Endpoint com score de IA
 @app.post("/salvar_analise")
 def salvar_analise(analise: AnaliseInput):
     try:
         print("[DEBUG] DATABASE_URL:", os.getenv("DATABASE_URL"))
 
+        # Conexão com o banco
+        conn = get_connection()
+        cur = conn.cursor()
 
-        # 2. Inserir dados
+        # Inserir dados
         cur.execute("""
             INSERT INTO analises_tributarias (cnpj, razao_social, tipo_empresa, regime_tributario, resultado)
             VALUES (%s, %s, %s, %s, %s)
@@ -83,7 +82,7 @@ def salvar_analise(analise: AnaliseInput):
         cur.close()
         conn.close()
 
-        # 3. Avaliação com IA
+        # Avaliação com IA
         prompt = gerar_prompt_analise(analise)
         resultado_ia = avaliar_com_ia(prompt)
 
@@ -99,9 +98,9 @@ def salvar_analise(analise: AnaliseInput):
             "detalhe": str(e)
         }
 
-
 @app.get("/")
 def read_root():
     return {"FlowMind": "Operacional"}
+
 
 
