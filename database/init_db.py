@@ -20,3 +20,4 @@ def init_database():
     cur.close()
     conn.close()
     print("🟢 Banco de dados inicializado com sucesso.")
+

@@ -1,13 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FlowMindz Panel</title>
-  </head>
-  <body class="bg-gray-950 text-white">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<html>
+<head>
+    <title>FlowMindz Dashboard</title>
+</head>
+<body>
+    <h1>FlowMindz Vite Painel</h1>
+    <p>Status do backend: <span id="status">carregando...</span></p>
+    <script>
+        fetch("http://localhost:8000/")
+            .then(res => res.json())
+            .then(data => document.getElementById("status").innerText = data.FlowMindz)
+            .catch(() => document.getElementById("status").innerText = "Erro");
+    </script>
+</body>
+>>>>>>> 656698d989372089308e49e6732a598c027a1dec
 </html>
