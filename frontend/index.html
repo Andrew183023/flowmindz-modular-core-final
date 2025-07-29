@@ -1,17 +1,27 @@
+
 <!DOCTYPE html>
-<html>
-<head>
-    <title>FlowMindz Dashboard</title>
-</head>
-<body>
-    <h1>FlowMindz Vite Painel</h1>
-    <p>Status do backend: <span id="status">carregando...</span></p>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FlowMindz Vite Painel</title>
+    <link rel="icon" href="/favicon.ico" />
+  </head>
+  <body class="bg-gray-950 text-white font-sans p-6">
+    <h1 class="text-3xl font-bold mb-4">FlowMindz Vite Painel</h1>
+    <p>Status do backend: <span id="status" class="font-mono text-yellow-400">Carregando...</span></p>
+
     <script>
-        fetch("http://localhost:8000/")
-            .then(res => res.json())
-            .then(data => document.getElementById("status").innerText = data.FlowMindz)
-            .catch(() => document.getElementById("status").innerText = "Erro");
+      const backendUrl = "https://flowmindz-backend.up.railway.app"; // Altere aqui se o backend estiver em outro domínio
+
+      fetch(backendUrl)
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById("status").innerText = data.FlowMind || "Conectado";
+        })
+        .catch(() => {
+          document.getElementById("status").innerText = "Erro ao conectar 😢";
+        });
     </script>
-</body>
->>>>>>> 656698d989372089308e49e6732a598c027a1dec
+  </body>
 </html>
