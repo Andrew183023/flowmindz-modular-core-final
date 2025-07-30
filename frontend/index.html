@@ -11,17 +11,16 @@
     <h1 class="text-3xl font-bold mb-4">FlowMindz Vite Painel</h1>
     <p>Status do backend: <span id="status" class="font-mono text-yellow-400">Carregando...</span></p>
 
-    <script>
-      const backendUrl = "https://flowmindz-backend.up.railway.app"; // Altere aqui se o backend estiver em outro domínio
+<script>
+  const backendUrl = "https://flowmindz-backend.up.railway.app/";
 
-      fetch(backendUrl)
-        .then(res => res.json())
-        .then(data => {
-          document.getElementById("status").innerText = data.FlowMind || "Conectado";
-        })
-        .catch(() => {
-          document.getElementById("status").innerText = "Erro ao conectar 😢";
-        });
-    </script>
-  </body>
-</html>
+  fetch(backendUrl)
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("status").innerText = data.FlowMind || "Conectado";
+    })
+    .catch(() => {
+      document.getElementById("status").innerText = "Erro ao conectar 😢";
+    });
+</script>
+
